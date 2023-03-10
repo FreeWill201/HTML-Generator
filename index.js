@@ -104,3 +104,7 @@ function promptIntern() {
 
 // Call the function to prompt for the team manager
 promptUser();
+
+// Code currently generates an html file
+// Make sure to fully meet the specified criteria of specific prompted input
+// to match up with what goes into the html file

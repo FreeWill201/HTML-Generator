@@ -1,54 +1,68 @@
 const fs = require("fs");
 const handlebars = require("handlebars");
 
-// Read in the Handlebars template file
-const templateString = fs.readFileSync(
-  "./src/team-template.handlebars",
+// Read in the Employee Handlebars template file
+const employeeTemplateString = fs.readFileSync(
+  "./src/Employee-template.handlebars",
   "utf8"
 );
 
-// Compile the Handlebars template
-const template = handlebars.compile(templateString);
+// Read in the Engineer Handlebars template file
+const engineerTemplateString = fs.readFileSync(
+  "./src/Engineer-template.handlebars",
+  "utf8"
+);
+
+// Read in the Intern Handlebars template file
+const internTemplateString = fs.readFileSync(
+  "./src/intern-template.handlebars",
+  "utf8"
+);
+
+// Read in the Manager Handlebars template file
+const managerTemplateString = fs.readFileSync(
+  "./src/manager-template.handlebars",
+  "utf8"
+);
+
+// Compile the Handlebars templates
+const employeeTemplate = handlebars.compile(employeeTemplateString);
+const engineerTemplate = handlebars.compile(engineerTemplateString);
+const internTemplate = handlebars.compile(internTemplateString);
+const managerTemplate = handlebars.compile(managerTemplateString);
 
 function generateHtml(teamMembers) {
   // Map each team member to an object containing their data and the appropriate template name
   const memberData = teamMembers.map((member) => {
-    let templateName;
+    let template;
     switch (member.getRole()) {
       case "Manager":
-        templateName = "manager-template";
+        template = managerTemplate;
         break;
       case "Engineer":
-        templateName = "engineer-template";
+        template = engineerTemplate;
         break;
       case "Intern":
-        templateName = "intern-template";
+        template = internTemplate;
+        break;
+      case "Employee":
+        template = employeeTemplate;
         break;
       default:
         throw new Error(`Unknown role: ${member.getRole()}`);
     }
     return {
       data: member,
-      template: templateName,
+      template: template,
     };
   });
 
   // Generate the HTML for each team member using the appropriate template
   const memberHtml = memberData.map((member) => {
-    const templateString = fs.readFileSync(
-      `./src/${member.template}.handlebars`,
-      "utf8"
-    );
-    const memberTemplate = handlebars.compile(templateString);
-    return memberTemplate(member.data);
+    return member.template(member.data);
   });
 
-  // Combine the HTML for each team member into a single string
-  const html = memberHtml.join("\n");
-
-  return html;
+  return memberHtml.join("\n");
 }
 
 module.exports = generateHtml;
-
-// Make sure handlebars templates are installed properly and implemented
