@@ -1,3 +1,5 @@
+// The below variables call for a written file and a library for html code
+
 const fs = require("fs");
 const handlebars = require("handlebars");
 

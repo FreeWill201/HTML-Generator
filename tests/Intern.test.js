@@ -1,4 +1,8 @@
+// The below variable references to code created for the Intern class
+
 const Intern = require("../lib/Intern");
+
+// Lines 7-16 establish the tested parameters for the Intern class
 
 describe("Intern", () => {
   describe("constructor", () => {
@@ -11,12 +15,16 @@ describe("Intern", () => {
     });
   });
 
+  // Lines 20-25 ensure Intern is being properly called
+
   describe("getRole", () => {
     it("should return 'Intern'", () => {
       const intern = new Intern("Jane", 2, "jane@example.com", "UCLA");
       expect(intern.getRole()).toEqual("Intern");
     });
   });
+
+  // Lines 29-36 ensure the school parameter, specific to the Intern class, is being properly called and logged
 
   describe("getSchool", () => {
     it("should return the school of the intern", () => {

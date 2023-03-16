@@ -1,4 +1,8 @@
+// The below code references the Employee class's code, already written
+
 const Employee = require("../lib/Employee");
+
+// Lines 7-44 test for all the parameters utilized in the CLI when prompted
 
 describe("Employee", () => {
   describe("constructor", () => {
